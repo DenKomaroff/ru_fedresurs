@@ -1,4 +1,4 @@
-class BaseApi:
+class BaseAPI:
 
     def __init__(self, url):
         pass

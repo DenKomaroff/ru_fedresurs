@@ -1,7 +1,7 @@
-from .api import BaseApi
+from .api import BaseAPI
 
 
-class TradePlaces(BaseApi):
+class TradePlaces(BaseAPI):
 
     def __init__(self, url):
         super().__init__(url)

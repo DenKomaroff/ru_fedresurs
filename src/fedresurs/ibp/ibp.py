@@ -3,7 +3,7 @@ from urllib3 import disable_warnings
 from .am_sro_memberships import AmSroMemberships
 from .arbitr_managers import ArbitrManagers
 from .auth import Auth
-from .bankrupts import Bankrupts
+from .bankrupts import BankruptsAPI, Bankrupt
 from .bankrupts_merged import BankruptsMerged
 from .company_trade_orgs import CompanyTradeOrgs
 from .messages import Messages
@@ -11,7 +11,7 @@ from .person_trade_orgs import PersonTradeOrgs
 from .reference_books import ReferenceBooks
 from .reports import Reports
 from .sros import Sros
-from .trade_messages import TradeMessages
+from .trade_messages import TradeMessages, TradeMessagesAPI
 from .trade_places import TradePlaces
 
 PROD_HOST = 'bank-publications-prod.fedresurs.ru'
@@ -54,7 +54,7 @@ class InterfaxBankruptcyPublications:
         return Auth(url=self.url, login=self.login, pwd=self.pwd).execute(self.session)
 
     def bankrupts(self, **kwargs):
-        return Bankrupts(url=self.url).execute(self.session, **kwargs)
+        return BankruptsAPI(url=self.url).execute(self.session, **kwargs)
 
     def bankrupts_merged(self, **kwargs):
         return BankruptsMerged(url=self.url).execute(self.session, **kwargs)
@@ -99,13 +99,13 @@ class InterfaxBankruptcyPublications:
         return Sros(url=self.url).execute(self.session, **kwargs)
 
     def trade_messages(self, **kwargs):
-        return TradeMessages(url=self.url).execute(self.session, **kwargs)
+        return TradeMessagesAPI(url=self.url).execute(self.session, **kwargs)
 
     def trade_message(self, guid):
-        return TradeMessages(url=self.url).by_id(self.session, guid)
+        return TradeMessagesAPI(url=self.url).by_id(self.session, guid)
 
     def trade_message_files(self, guid):
-        return TradeMessages(url=self.url).files(self.session, guid)
+        return TradeMessagesAPI(url=self.url).files(self.session, guid)
 
     def trade_places(self, **kwargs):
         return TradePlaces(url=self.url).execute(self.session, **kwargs)

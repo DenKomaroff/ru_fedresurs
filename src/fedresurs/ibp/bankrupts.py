@@ -52,6 +52,9 @@ class BankruptLegal(Bankrupt):
     def __init__(self, data):
         super().__init__(data)
 
+    def __str__(self):
+        return self.name
+
     def init_data(self):
         if self.data is not None:
             self.name = self.data.get('name')
@@ -64,6 +67,10 @@ class BankruptPerson(Bankrupt):
 
     def __init__(self):
         super().__init__()
+
+    def __str__(self):
+        return f'{self.last_name} {self.first_name}'
+
 
     def init_data(self):
         if self.data is not None:

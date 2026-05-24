@@ -8,7 +8,7 @@ class TestMessages(unittest.TestCase):
 
     def test_bankrupts(self):
         with InterfaxBankruptcyPublications() as ipb:
-            j = ipb.messages(datePublishBegin='gte:2024-02-01', datePublishEnd='lte:2024-02-27', offset=0, limit=50)
+            j = ipb.messages(datePublishBegin='gte:2024-02-01', datePublishEnd='lte:2024-03-01', offset=0, limit=50)
             assert j['total'] > 0
             j = j['pageData']
             for i in j:
@@ -16,10 +16,11 @@ class TestMessages(unittest.TestCase):
                 i2 = i1['pageData'][0]
                 b1 = Bankrupt(i2)
                 print(b1)
+                # print(b1.birthdate)
 
     def test_messages(self):
         with InterfaxBankruptcyPublications() as ipb:
-            j = ipb.messages(datePublishBegin='gte:2024-02-01', datePublishEnd='lte:2024-02-27', offset=0, limit=50)
+            j = ipb.messages(datePublishBegin='gte:2024-03-01', datePublishEnd='lte:2024-03-27', offset=0, limit=50)
             assert j['total'] > 0
             j = j['pageData']
             for i in j:
@@ -27,11 +28,14 @@ class TestMessages(unittest.TestCase):
                 # print(i1['content'])
                 m1 = Message(i1)
                 print(m1.bankrupt_guid)
-                # print(Bankrupt(m1.bankrupt_guid))
+                i2 = ipb.bankrupts(guid=m1.bankrupt_guid, offset=0, limit=1)
+                print(Bankrupt(i2['pageData'][0]))
                 print(m1.number)
                 print(m1.type)
                 print(m1.bankruptcy_case_number)
-                # print(m1.content.get('MessageData'))
+                print(m1.publisher)
+                print(m1.message_info)
+                print(m1.text)
                 # mt1 = m1.content.get('MessageData').get('MessageInfo').get('@MessageType')
                 # print(m1.content.get('MessageData').get('MessageInfo').get(mt1).get('Text'))
                 print('\n---\n')

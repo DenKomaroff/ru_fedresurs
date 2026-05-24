@@ -1,4 +1,5 @@
 from .api import BaseAPI
+from datetime import datetime
 
 
 class BankruptsAPI(BaseAPI):
@@ -51,7 +52,11 @@ class BankruptLegal(Bankrupt):
         super().__init__(data)
 
     def __str__(self):
-        return self.name
+        return (f'<    {self.name}    >\n'
+                f'  ИНН:             {self.inn}\n'
+                f'  ОГРН:            {self.ogrn}\n'
+                f'  адрес:           {self.address} \n'
+                )
 
     def init_data(self):
         if self.data is not None:
@@ -67,7 +72,13 @@ class BankruptPerson(Bankrupt):
         super().__init__()
 
     def __str__(self):
-        return f'{self.last_name} {self.first_name}'
+        return (f'<    {self.last_name} {self.first_name} {self.middle_name}    >\n'
+                f'  ИНН:             {self.inn if self.inn is not None else '-' }\n'
+                f'  СНИЛС:           {self.snils if self.snils is not None else '-' }\n'
+                f'  дата рождения:   {self.birthdate.strftime("%d.%m.%Y")}\n'
+                f'  место рождения:  {self.birthplace}\n'
+                f'  адрес:           {self.address} \n'
+                )
 
 
     def init_data(self):
@@ -78,6 +89,6 @@ class BankruptPerson(Bankrupt):
             self.inn = self.data.get('inn')
             self.snils = self.data.get('snils')
             self.birthplace = self.data.get('birthplace')
-            self.birthdate = self.data.get('birthdate')
+            self.birthdate = datetime.strptime(self.data.get('birthdate')[0:10], '%Y-%m-%d')
             self.address = self.data.get('address')
             self.name_history = self.data.get('nameHistory')

@@ -168,3 +168,9 @@ class Message:
 
     def _parse_content(self):
         self.bankruptcy_case_number = self.content.get('MessageData').get('CaseNumber')
+        self.publisher = self.content.get('MessageData').get('Publisher')
+        self.message_info = self.content.get('MessageData').get('MessageInfo')
+        self.text = self.message_info.get(self.type).get('Text')
+
+        # MessageInfo
+        # Bankrupt

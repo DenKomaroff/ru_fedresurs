@@ -38,10 +38,9 @@ class Bankrupt:
         if self.data is not None:
             self.guid = self.data.get('guid')
             self.type = self.data.get('type')
-            if self.type == 'Company':
-                self.__class__ = BankruptLegal
-            if self.type == 'Person':
-                self.__class__ = BankruptPerson
+            match self.type:
+                case "Company": self.__class__ = BankruptLegal
+                case "Person": self.__class__ = BankruptPerson
             self.data = self.data.get('data')
             self.init_data()
 

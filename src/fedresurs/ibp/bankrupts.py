@@ -44,7 +44,6 @@ class Bankrupt:
                 self.__class__ = BankruptPerson
             self.data = self.data.get('data')
             self.init_data()
-        pass
 
 
 class BankruptLegal(Bankrupt):

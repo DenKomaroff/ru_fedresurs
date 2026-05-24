@@ -1,7 +1,7 @@
 from .api import BaseAPI
 
 
-class ArbitrManagers(BaseAPI):
+class ArbitrManagersAPI(BaseAPI):
 
     def __init__(self, url):
         super().__init__(url)

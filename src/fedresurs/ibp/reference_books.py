@@ -1,4 +1,4 @@
-class ReferenceBooks:
+class ReferenceBooksAPI:
 
     def __init__(self, url):
         self.url = f'{url}/v1/reference-books'

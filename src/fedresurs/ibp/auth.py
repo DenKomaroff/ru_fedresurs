@@ -1,7 +1,7 @@
 import json
 
 
-class Auth:
+class AuthAPI:
 
     def __init__(self, url, login, pwd):
         self.url = f'{url}/v1/auth'

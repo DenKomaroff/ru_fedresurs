@@ -1,7 +1,7 @@
 from .api import BaseAPI
 
 
-class BankruptsMerged(BaseAPI):
+class BankruptsMergedAPI(BaseAPI):
 
     def __init__(self, url):
         super().__init__(url)

@@ -1,7 +1,7 @@
 from .api import BaseAPI
 
 
-class AmSroMemberships(BaseAPI):
+class AmSroMembershipsAPI(BaseAPI):
 
     def __init__(self, url):
         super().__init__(url)

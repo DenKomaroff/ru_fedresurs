@@ -1,11 +1,11 @@
 from .api import BaseAPI
 
 
-class TradeMessagesAPI(BaseAPI):
+class MessagesAPI(BaseAPI):
 
     def __init__(self, url):
         super().__init__(url)
-        self.url = f'{url}/v1/trade-messages'
+        self.url = f'{url}/v1/messages'
 
     def execute(self, ses, **kwargs):
         self._prepare_params(**kwargs)
@@ -21,4 +21,9 @@ class TradeMessagesAPI(BaseAPI):
     def files(self, ses, guid):
         response = ses.request(method='get', url=f'{self.url}/{guid}/files/archive', verify=False)
         result = response.content if response.status_code == 200 else response
+        return result
+
+    def linked(self, ses, guid):
+        response = ses.request(method='get', url=f'{self.url}/{guid}/linked', verify=False)
+        result = response.json() if response.status_code == 200 else response
         return result
